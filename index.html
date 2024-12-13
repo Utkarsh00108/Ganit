@@ -1,337 +1,109 @@
-<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cogitoloop - Utkarsh Kashyap's Creative Space</title>
-    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;700&family=Raleway:wght@400;700&display=swap" rel="stylesheet">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Utkarsh Kashyap</title>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&amp;display=swap" rel="stylesheet">
+    <link href="styles.css" rel="stylesheet">
+    <!-- Add basic inline CSS for visibility toggle -->
     <style>
-        body {
-            font-family: 'Raleway', sans-serif;
-            color: #ffffff;
-            background-color: #1e1e1e;
-            margin: 0;
-            padding: 0;
-            line-height: 1.6;
-            transition: background-color 0.3s, color 0.3s;
-            overflow-x: hidden;
-        }
-        .light-mode {
-            background-color: #f0f0f0; /* Softer off-white background color */
-            color: #333333;
-        }
-        header {
-            background: #333333;
-            color: #ffffff;
-            padding: 10px 20px;
-            text-align: center;
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 1000;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            transition: background 0.3s;
-        }
-        header.light-mode {
-            background: #6a4c93;
-            color: #ffffff;
-        }
-        header h1 {
-            font-family: 'Merriweather', serif;
-            margin: 0;
-        }
-        header p {
-            margin: 0;
-            font-size: 14px;
-            font-weight: normal;
-        }
-        .nav-toggle {
-            cursor: pointer;
-            padding: 10px;
-            position: absolute;
-            left: 10px;
-            top: 10px;
-            transition: transform 0.3s;
-            z-index: 1001;
-        }
-        .nav-toggle span {
-            display: block;
-            width: 25px;
-            height: 3px;
-            margin: 5px auto;
-            background-color: currentColor;
-            transition: 0.4s;
-        }
-        .nav-toggle.rotate span:nth-child(1) {
-            transform: rotate(-45deg) translate(-5px, 6px);
-        }
-        .nav-toggle.rotate span:nth-child(2) {
-            opacity: 0;
-        }
-        .nav-toggle.rotate span:nth-child(3) {
-            transform: rotate(45deg) translate(-5px, -6px);
-        }
-        nav {
-            position: fixed;
-            top: 70px;
-            left: 10px;
-            width: 220px;
-            background: #333333;
-            padding: 10px;
-            text-align: left;
+        .hidden {
             display: none;
-            flex-direction: column;
-            z-index: 999;
-            transition: all 0.5s;
-        }
-        nav a {
-            color: inherit;
-            padding: 10px 15px;
-            text-decoration: none;
-            font-weight: bold;
-            opacity: 0;
-            transform: translateX(-100%);
-            transition: opacity 0.5s, transform 0.5s;
-        }
-        .nav-open nav {
-            display: flex;
-            flex-direction: column;
-        }
-        .nav-open nav a {
-            opacity: 1;
-            transform: translateX(0);
-        }
-        .container {
-            margin-top: 80px;
-            padding: 20px;
-        }
-        section {
-            padding: 20px 0;
-            display: none;
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.5s, transform 0.5s;
-        }
-        section.active {
-            display: block;
-            opacity: 1;
-            transform: translateY(0);
-        }
-        .light-mode section {
-            border-color: #ddd;
-        }
-        .image-container {
-            text-align: center;
-            margin: 20px 0;
-        }
-        .image-container img {
-            max-width: 100%;
-            height: auto;
-        }
-        footer {
-            background: #333333;
-            color: #ffffff;
-            text-align: center;
-            padding: 10px 0;
-            margin-top: 20px;
-            transition: background 0.3s;
-        }
-        footer.light-mode {
-            background: #6a4c93;
-            color: #ffffff;
-        }
-        a {
-            color: #00bfff;
-            text-decoration: none;
-            transition: color 0.3s;
-        }
-        .light-mode a {
-            color: #6a4c93;
-        }
-        .theme-toggle {
-            cursor: pointer;
-            padding: 10px;
-            position: absolute;
-            left: 50px;
-            top: 10px;
-            z-index: 1001;
-        }
-        .switch {
-            position: relative;
-            display: inline-block;
-            width: 34px;
-            height: 20px;
-        }
-        .switch input {
-            opacity: 0;
-            width: 0;
-            height: 0;
-        }
-        .slider {
-            position: absolute;
-            cursor: pointer;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-color: #6a4c93;
-            transition: .4s;
-            border-radius: 34px;
-        }
-        .slider:before {
-            position: absolute;
-            content: "";
-            height: 12px;
-            width: 12px;
-            left: 4px;
-            bottom: 4px;
-            background-color: white;
-            transition: .4s;
-            border-radius: 50%;
-        }
-        input:checked + .slider {
-            background-color: #6a4c93;
-        }
-        input:checked + .slider:before {
-            transform: translateX(14px);
-        }
-        .section-container {
-            position: relative;
-        }
-        .section-container .section-content {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            transition: all 0.5s;
-        }
-        .section-container .section-content.active {
-            position: relative;
         }
     </style>
 </head>
 <body>
-    <header>
-        <div class="nav-toggle" onclick="toggleNav()">
-            <span></span>
-            <span></span>
-            <span></span>
-        </div>
-        <div>
-            <h1>Cogitoloop</h1>
-            <p>Utkarsh Kashyap's Creative Space</p>
-        </div>
-        <div class="theme-toggle">
-            <label class="switch">
-                <input type="checkbox" id="themeSwitch" onclick="toggleTheme()">
-                <span class="slider"></span>
-            </label>
-        </div>
-    </header>
-    <nav>
-        <a href="#home" onclick="showSection('home')">Home</a>
-        <a href="#poems" onclick="showSection('poems')">My Poems</a>
-        <a href="#philosophy" onclick="showSection('philosophy')">Philosophical Writings</a>
-        <a href="#shayari" onclick="showSection('shayari')">My Shayaris</a>
-        <a href="#ghazals" onclick="showSection('ghazals')">My Ghazals</a>
-        <a href="#poets" onclick="showSection('poets')">Famous Poets</a>
-        <a href="#maths-physics" onclick="showSection('maths-physics')">Maths and Physics</a>
-    </nav>
-    <div class="container">
-        <div class="section-container">
-            <section id="home" class="section-content active">
-                <h2>Welcome to Cogitoloop</h2>
-                <p>Hello! I'm Utkarsh Kashyap, a passionate writer and thinker. On this site, you'll find my collection of Hindi poetry, philosophical writings, shayaris, and ghazals. I also share my insights on famous poets and delve into the fascinating worlds of mathematics and physics. Enjoy exploring my creative space!</p>
-            </section>
-            <section id="poems" class="section-content">
-                <h2>My Poems</h2>
-                <div class="image-container">
-                    <img src="https://example.com/deep-thinking-eye.jpg" alt="Eye full of tears representing deep thinking">
-                </div>
-                <p>Here you'll find a collection of my poems that delve into the depths of human emotion and experience.</p>
-            </section>
-            <section id="philosophy" class="section-content">
-                <h2>Philosophical Writings</h2>
-                <div class="image-container">
-                    <img src="https://example.com/deep-thinking.jpg" alt="Image representing deep philosophical thinking">
-                </div>
-                <p>Explore my writings on philosophical topics that ponder the mysteries of existence and consciousness.</p>
-            </section>
-            <section id="shayari" class="section-content">
-                <h2>My Shayaris</h2>
-                <p>Immerse yourself in my shayaris that blend poetic beauty with deep emotional expression.</p>
-            </section>
-            <section id="ghazals" class="section-content">
-                <h2>My Ghazals</h2>
-                <p>Experience the beauty of ghazals that express the pain of loss and the beauty of love.</p>
-            </section>
-            <section id="poets" class="section-content">
-                <h2>Famous Poets</h2>
-                <p>Learn about famous poets like Ghalib and Saqi, whose works have inspired generations.</p>
-            </section>
-            <section id="maths-physics" class="section-content">
-                <h2>Maths and Physics</h2>
-                <div class="image-container">
-                    <img src="https://example.com/maths-physics.jpg" alt="Image representing deep mathematical and physical thinking">
-                </div>
-                <p>Read my writings on mathematics and physics, where I explore complex ideas and theories.</p>
-            </section>
-        </div>
-        <footer>
-            <p>&copy; 2024 Utkarsh Kashyap. All rights reserved.</p>
-            <p><a href="https://example.com">View my other site</a></p>
-        </footer>
-    </div>
-    <script>
-        document.addEventListener('click', (e) => {
-            const navToggle = document.querySelector('.nav-toggle');
-            const nav = document.querySelector('nav');
-            if (nav.classList.contains('nav-open') && !nav.contains(e.target) && !navToggle.contains(e.target)) {
-                document.body.classList.remove('nav-open');
-                navToggle.classList.remove('rotate');
+    <style>
+        /* Responsive font sizes for mobile */
+        @media (max-width: 768px) {
+            h3, p {
+                font-size: 16px;
             }
-        });
-
-        function toggleNav() {
-            const navToggle = document.querySelector('.nav-toggle');
-            navToggle.classList.toggle('rotate');
-            document.body.classList.toggle('nav-open');
-            const navLinks = document.querySelectorAll('nav a');
-            navLinks.forEach((link, index) => {
-                link.style.transitionDelay = `${index * 0.1}s`;
-                link.style.opacity = navToggle.classList.contains('rotate') ? '1' : '0';
-                link.style.transform = navToggle.classList.contains('rotate') ? 'translateX(0)' : 'translateX(-100%)';
-            });
+            footer {
+                font-size: 12px;
+            }
         }
-
-        function showSection(id) {
-            const sections = document.querySelectorAll('.section-content');
-            sections.forEach(section => {
-                section.classList.remove('active');
-                if (section.id === id) {
-                    section.classList.add('active');
-                }
-            });
-            document.body.classList.remove('nav-open');
-            document.querySelector('.nav-toggle').classList.remove('rotate');
+        /* Responsive font sizes for very small mobile screens */
+        @media (max-width: 480px) {
+            h3, p {
+                font-size: 14px;
+            }
+            footer {
+                font-size: 10px;
+            }
         }
+    </style>
 
-        function toggleTheme() {
-            const themeSwitch = document.getElementById('themeSwitch');
-            document.body.classList.toggle('light-mode', themeSwitch.checked);
-            document.querySelector('header').classList.toggle('light-mode', themeSwitch.checked);
-            document.querySelector('footer').classList.toggle('light-mode', themeSwitch.checked);
-            const switchSlider = document.querySelector('.slider');
-            switchSlider.style.backgroundColor = themeSwitch.checked ? '#6a4c93' : '#ccc';
-            const switchThumb = document.querySelector('.slider:before');
-            switchThumb.style.backgroundColor = themeSwitch.checked ? '#fff' : '#333';
+    <div class="container">
+        <!-- Introduction section -->
+        <div class="introduction">
+            <p>
+                I am Utkarsh Kashyap, an undergraduate and aspiring physicist and mathematician working on fascinating problems in pure mathematics and theoretical physics. My passion lies in understanding the intricacies of the universe through logical reasoning and mathematical formulations. I have also written numerous notes on Physics and Mathematics available for download. You may find some lecture notes as well.
+            </p>
+        </div>
+
+        <!-- Sections: Notes, Publications, Lectures, Blog -->
+        <div class="sections">
+            <!-- Clickable Topics -->
+            <h3 onclick="toggleSubtopics('mathProofs')">Mathematical Proofs</h3>
+            <ul class="hidden" id="mathProofs">
+                <li><a download="" href="math_notes_1.pdf">Chessboard Problems</a></li>
+                <li><a download="" href="math_notes_1.pdf">Pigeonhole Principle</a></li>
+                <li><a download="" href="math_notes_1.pdf">Fermat's Little Theorem</a></li>
+                <li><a download="" href="math_notes_1.pdf">Principle of Induction</a></li>
+            </ul>
+
+            <h3 onclick="toggleSubtopics('axiomaticSetTheory')">Set Theory</h3>
+            <ul class="hidden" id="axiomaticSetTheory">
+                <li><a download="" href="math_notes_2.pdf">Axiomatic Set Theory (book)</a></li>
+                <li><a href="blog.html" target="_blank">Blog</a></li> <!-- Link to the Blog page -->
+            </ul>
+
+            <h3 onclick="toggleSubtopics('analysis')">Analysis</h3>
+            <ul class="hidden" id="analysis">
+                <li><a download="" href="math_notes_3.pdf">Analysis</a></li>
+            </ul>
+
+            <h3 onclick="toggleSubtopics('classicalMechanics')">Classical Mechanics</h3>
+            <ul class="hidden" id="classicalMechanics">
+                <li><a download="" href="physics_notes_1.pdf">Classical Mechanics</a></li>
+            </ul>
+
+            <h3 onclick="toggleSubtopics('quantumMechanics')">Quantum Mechanics</h3>
+            <ul class="hidden" id="quantumMechanics">
+                <li><a download="" href="physics_notes_2.pdf">Quantum Mechanics</a></li>
+            </ul>
+
+            <h3 onclick="toggleSubtopics('electrodynamics')">Electrodynamics</h3>
+            <ul class="hidden" id="electrodynamics">
+                <li><a download="" href="physics_notes_3.pdf">Electrodynamics</a></li>
+            </ul>
+
+            <hr />
+
+            <h3 onclick="toggleSubtopics('lecture notes')">Lecture Notes</h3>
+            <ul class="hidden" id="lecture notes">
+                <li><a download="" href="https://drive.google.com/file/d/12GvsZZ_S1Z34sQvRxen920B2VDWDiE3l/view?usp=drivesdk">Lectures on 'Laplace's and Poisson's Equation'</a></li>
+                <li><a download="" href="https://drive.google.com/file/d/19Y3ryB5TcjeuOe-Ea4R7JlHv2OSgvX5u/view?usp=drivesdk">Lectures on 'Method of Images'</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        © 2024 Utkarsh Kashyap All rights reserved
+    </footer>
+
+    <!-- JavaScript to toggle visibility of subtopics -->
+    <script>
+        function toggleSubtopics(id) {
+            var element = document.getElementById(id);
+            if (element.classList.contains('hidden')) {
+                element.classList.remove('hidden');
+            } else {
+                element.classList.add('hidden');
+            }
         }
-
-        document.addEventListener('DOMContentLoaded', () => {
-            document.querySelector('#home').classList.add('active');
-        });
     </script>
 </body>
 </html>
