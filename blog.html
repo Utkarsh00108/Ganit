@@ -13,12 +13,53 @@
     <div class="container">
         <h1>Set Theory Blog</h1>
         <p>Welcome to the Set Theory Blog! Here are some articles and insights:</p>
-        <ul>
-            <li><a href="article1.html">Understanding Cardinality</a></li>
-            <li><a href="article2.html">Applications of Set Theory in Computer Science</a></li>
-            <li><a href="article3.html">Historical Evolution of Set Theory</a></li>
-        </ul>
-        <p>Check back soon for more updates!</p>
+        <h2>Proof of the Generalized Formula for the Union of Subsets</h2>
+    <p>
+        Let \( A_1, A_2, \dots, A_n \) be subsets of a finite set \( S \). We aim to prove the formula for the size of the union:
+    </p>
+    <p style="text-align: center;">
+        \( m(A_1 \cup A_2 \cup \cdots \cup A_n) = \sum_{i=1}^n m(A_i) - \sum_{1 \leq i < j \leq n} m(A_i \cap A_j) + \cdots + (-1)^{n+1} m(A_1 \cap A_2 \cap \cdots \cap A_n). \)
+    </p>
+    <h3>Proof</h3>
+    <p>
+        We use the principle of inclusion-exclusion to count the elements in the union \( A_1 \cup A_2 \cup \cdots \cup A_n \). 
+    </p>
+    <ol>
+        <li>
+            First, we sum the sizes of all the individual sets \( A_i \):
+            \[
+            \sum_{i=1}^n m(A_i).
+            \]
+        </li>
+        <li>
+            Next, we subtract the sizes of all pairwise intersections \( A_i \cap A_j \) (as these are counted twice in the first term):
+            \[
+            \sum_{1 \leq i < j \leq n} m(A_i \cap A_j).
+            \]
+        </li>
+        <li>
+            We then add back the sizes of all triple intersections \( A_i \cap A_j \cap A_k \) (as these were subtracted too many times in the previous step):
+            \[
+            \sum_{1 \leq i < j < k \leq n} m(A_i \cap A_j \cap A_k).
+            \]
+        </li>
+        <li>
+            This process continues, alternating subtraction and addition, until we reach the intersection of all \( n \) sets:
+            \[
+            (-1)^{n+1} m(A_1 \cap A_2 \cap \cdots \cap A_n).
+            \]
+        </li>
+    </ol>
+    <p>
+        Hence, the size of the union is given by:
+    </p>
+    <p style="text-align: center;">
+        \( m(A_1 \cup A_2 \cup \cdots \cup A_n) = \sum_{i=1}^n m(A_i) - \sum_{1 \leq i < j \leq n} m(A_i \cap A_j) + \cdots + (-1)^{n+1} m(A_1 \cap A_2 \cap \cdots \cap A_n). \)
+    </p>
+    <h2>Conclusion</h2>
+    <p>
+        The principle of inclusion-exclusion ensures that every element in \( S \) is counted exactly once in \( A_1 \cup A_2 \cup \cdots \cup A_n \).
+    </p>
     </div>
     <footer>
         © 2024 Utkarsh Kashyap All rights reserved
